@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { SEARCH_MOVIES, SEARCH_PERSON } from "../queries/queries";
 
+//fetch from APIs
 const TOM_CRUISE_ID = "500";
+const TOM_CRUISE_NAME = "Tom Cruise";
 
 const SearchBar: React.FC = () => {
   const [input, setInput] = useState("");
@@ -22,7 +24,7 @@ const SearchBar: React.FC = () => {
   };
 
   const handleListAll = () => {
-    searchPerson({ variables: { query: "Tom Cruise", page: 1 } });
+    searchPerson({ variables: { query: TOM_CRUISE_NAME, page: 1 } });
   };
 
   const movieResults = moviesData?.searchMovies.results || [];
@@ -68,6 +70,7 @@ const SearchBar: React.FC = () => {
         <p>Error occurred while fetching movie data: {moviesError.message}</p>
       ) : (
         <>
+          {/* move into sep component */}
           {tomCruiseMovies.length > 0 && (
             <div className="mt-4">
               <h2 className="text-xl font-bold mb-2">Movies:</h2>
@@ -92,12 +95,13 @@ const SearchBar: React.FC = () => {
         </p>
       ) : (
         <>
+          {/* move into sep component */}
           {allTomCruiseMovies.length > 0 && (
             <div className="mt-4">
               <h2 className="text-xl font-bold mb-2">Movies:</h2>
               {allTomCruiseMovies.map((person: any) => (
                 <div key={person.id}>
-                  {/* <h3>{person.name}</h3> */}
+                  {/* <h3>{person.nme}</h3> */}
                   {person.cast.map((movie: any) => (
                     <div
                       key={movie.id}
