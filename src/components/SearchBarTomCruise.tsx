@@ -53,6 +53,11 @@ const SearchBar: React.FC = () => {
           placeholder="Search Tom Cruise movies"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
           className="flex-grow mr-2 px-2 py-1 rounded-lg focus:outline-none"
         />
         <button
@@ -103,7 +108,6 @@ const SearchBar: React.FC = () => {
             <h2 className="text-xl font-bold mb-2">Movies:</h2>
             {allTomCruiseMovies.map((person: any) => (
               <div key={person.id}>
-                {/* <h3>{person.nme}</h3> */}
                 {person.cast.map((movie: any) => (
                   <div
                     key={movie.id}
