@@ -62,10 +62,10 @@ const SearchBar: React.FC = () => {
         </button>
       </div>
 
-      {moviesLoading || personLoading ? (
-        <p>Loading...</p>
-      ) : moviesError || personError ? (
-        <p>Error occurred while fetching data.</p>
+      {moviesLoading ? (
+        <p>Searching movies...</p>
+      ) : moviesError ? (
+        <p>Error occurred while fetching movie data: {moviesError.message}</p>
       ) : (
         <>
           {tomCruiseMovies.length > 0 && (
@@ -81,6 +81,17 @@ const SearchBar: React.FC = () => {
               ))}
             </div>
           )}
+        </>
+      )}
+
+      {personLoading ? (
+        <p>Loading all movies...</p>
+      ) : personError ? (
+        <p>
+          Error occurred while fetching all movie data: {personError.message}
+        </p>
+      ) : (
+        <>
           {allTomCruiseMovies.length > 0 && (
             <div className="mt-4">
               <h2 className="text-xl font-bold mb-2">Movies:</h2>
