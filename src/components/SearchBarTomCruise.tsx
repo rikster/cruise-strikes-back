@@ -8,6 +8,9 @@ const TOM_CRUISE_NAME = "Tom Cruise";
 
 const SearchBar: React.FC = () => {
   const [input, setInput] = useState("");
+  const [lastAction, setLastAction] = useState<"search" | "listAll" | null>(
+    null
+  );
 
   const [
     searchMovies,
@@ -20,10 +23,12 @@ const SearchBar: React.FC = () => {
   ] = useLazyQuery(SEARCH_PERSON);
 
   const handleSearch = () => {
+    setLastAction("search");
     searchMovies({ variables: { query: input, page: 1 } });
   };
 
   const handleListAll = () => {
+    setLastAction("listAll");
     searchPerson({ variables: { query: TOM_CRUISE_NAME, page: 1 } });
   };
 
@@ -68,24 +73,22 @@ const SearchBar: React.FC = () => {
         <p>Searching movies...</p>
       ) : moviesError ? (
         <p>Error occurred while fetching movie data: {moviesError.message}</p>
-      ) : (
+      ) : lastAction === "search" && tomCruiseMovies.length > 0 ? (
         <>
-          {/* move into sep component */}
-          {tomCruiseMovies.length > 0 && (
-            <div className="mt-4">
-              <h2 className="text-xl font-bold mb-2">Movies:</h2>
-              {tomCruiseMovies.map((movie: any) => (
-                <div
-                  key={movie.id}
-                  className="bg-white p-4 rounded-lg shadow-lg mb-4"
-                >
-                  <h3 className="text-lg font-semibold">{movie.title}</h3>
-                </div>
-              ))}
-            </div>
-          )}
+          {/* move into sep component? */}
+          <div className="mt-4">
+            <h2 className="text-xl font-bold mb-2">Movies:</h2>
+            {tomCruiseMovies.map((movie: any) => (
+              <div
+                key={movie.id}
+                className="bg-white p-4 rounded-lg shadow-lg mb-4"
+              >
+                <h3 className="text-lg font-semibold">{movie.title}</h3>
+              </div>
+            ))}
+          </div>
         </>
-      )}
+      ) : null}
 
       {personLoading ? (
         <p>Loading all movies...</p>
@@ -93,29 +96,27 @@ const SearchBar: React.FC = () => {
         <p>
           Error occurred while fetching all movie data: {personError.message}
         </p>
-      ) : (
+      ) : lastAction === "listAll" && allTomCruiseMovies.length > 0 ? (
         <>
-          {/* move into sep component */}
-          {allTomCruiseMovies.length > 0 && (
-            <div className="mt-4">
-              <h2 className="text-xl font-bold mb-2">Movies:</h2>
-              {allTomCruiseMovies.map((person: any) => (
-                <div key={person.id}>
-                  {/* <h3>{person.nme}</h3> */}
-                  {person.cast.map((movie: any) => (
-                    <div
-                      key={movie.id}
-                      className="bg-white p-4 rounded-lg shadow-lg mb-4"
-                    >
-                      <h3 className="text-lg font-semibold">{movie.title}</h3>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          )}
+          {/* move into sep component? */}
+          <div className="mt-4">
+            <h2 className="text-xl font-bold mb-2">Movies:</h2>
+            {allTomCruiseMovies.map((person: any) => (
+              <div key={person.id}>
+                {/* <h3>{person.nme}</h3> */}
+                {person.cast.map((movie: any) => (
+                  <div
+                    key={movie.id}
+                    className="bg-white p-4 rounded-lg shadow-lg mb-4"
+                  >
+                    <h3 className="text-lg font-semibold">{movie.title}</h3>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 };
