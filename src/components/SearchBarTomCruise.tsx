@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { SEARCH_MOVIES_WITH_CAST, SEARCH_PERSON } from "../queries/queries";
+import { SEARCH_MOVIES, SEARCH_PERSON } from "../queries/queries";
 
 const TOM_CRUISE_ID = "500";
 
@@ -10,7 +10,7 @@ const SearchBar: React.FC = () => {
   const [
     searchMovies,
     { data: moviesData, loading: moviesLoading, error: moviesError },
-  ] = useLazyQuery(SEARCH_MOVIES_WITH_CAST);
+  ] = useLazyQuery(SEARCH_MOVIES);
 
   const [
     searchPerson,
@@ -31,6 +31,12 @@ const SearchBar: React.FC = () => {
   );
 
   const personResults = personData?.searchPerson.results || [];
+  const allTomCruiseMovies = personResults.map((actor: any) => {
+    return {
+      ...actor,
+      cast: actor.cast.filter((movie: any) => movie.title !== null),
+    };
+  });
 
   return (
     <div>
@@ -75,12 +81,12 @@ const SearchBar: React.FC = () => {
               ))}
             </div>
           )}
-          {personResults.length > 0 && (
+          {allTomCruiseMovies.length > 0 && (
             <div className="mt-4">
               <h2 className="text-xl font-bold mb-2">Movies:</h2>
-              {personResults.map((person: any) => (
+              {allTomCruiseMovies.map((person: any) => (
                 <div key={person.id}>
-                  <h3>{person.name}</h3>
+                  {/* <h3>{person.name}</h3> */}
                   {person.cast.map((movie: any) => (
                     <div
                       key={movie.id}
