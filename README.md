@@ -18,6 +18,10 @@ John Johnson hosts a weekly movie event with his local Tom Cruise Fan club calle
 
 - GraphQL Endpoint: https://tmdb-one-blue.vercel.app/
 - GraphQL Playground: https://www.graphqlbin.com/v2/new (enter endpoint above)
+- GraphQL Schema
+ ```
+src\queries\schema.graphql
+```
 
 ### Tech Stack
 

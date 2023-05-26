@@ -1,0 +1,278 @@
+# Exposes a URL that specifies the behavior of this scalar.
+directive @specifiedBy(
+  # The URL that specifies the behavior of this scalar.
+  url: String!
+) on SCALAR
+type Cast {
+  id: ID!
+  name: String
+  character: String
+  profile_path: String
+  known_for_department: String
+  job: String
+  department: String
+  person: Person!
+}
+
+type Creator {
+  id: ID!
+  credit_id: String
+  name: String
+  gender: Int
+  profile_path: String
+}
+
+type Credits {
+  id: ID!
+  cast: [Cast!]!
+  crew: [Crew!]!
+}
+
+type CreditsTv {
+  id: ID!
+  cast: [Cast!]!
+  crew: [CrewAggregate!]!
+}
+
+type Crew {
+  id: ID!
+  name: String!
+  department: String
+  job: String
+  profile_path: String
+  person: Person!
+}
+
+type CrewAggregate {
+  id: ID!
+  name: String!
+  department: String
+  profile_path: String
+  popularity: Float
+  jobs: [Job!]
+}
+
+input DiscoverMoviesInput {
+  sortBy: String!
+  genreId: ID!
+  page: Int!
+  year: String!
+  company: String!
+  provider: String!
+  language: String!
+}
+
+input DiscoverSeriesInput {
+  sortBy: String!
+  genreId: ID!
+  page: Int!
+  year: String!
+  network: String!
+  language: String!
+}
+
+type Episode {
+  air_date: String
+  episode_number: Int
+  id: Int
+  name: String
+  overview: String
+  production_code: String
+  season_number: Int
+  still_path: String
+  vote_average: Float
+  vote_count: Int
+  videos: [EpisodeVideo]
+}
+
+type EpisodeVideo {
+  id: ID
+  name: String
+  key: String
+  site: String
+  size: Int
+  type: String
+  official: Boolean
+  iso_639_1: String
+  iso_3166_1: String
+}
+
+type Genre {
+  id: ID!
+  name: String!
+}
+
+type Job {
+  credit_id: String
+  job: String
+  episode_count: Int
+}
+
+type Movie {
+  id: ID!
+  title: String
+  original_title: String
+  name: String
+  overview: String
+  release_date: String
+  poster_path: String
+  backdrop_path: String
+  vote_average: Float
+  runtime: Int
+  homepage: String
+  popularity: Float
+  production_companies: [ProductionCompany!]
+  genres: [Genre!]
+  credits: Credits
+  reviews: [Review]!
+  recommendations: [Movie]!
+  videos: [Video]!
+}
+
+input MovieCreateInput {
+  title: String!
+  overview: String!
+  release_date: String!
+  poster_path: String!
+}
+
+type MoviesResponse {
+  page: Int!
+  total_results: Int!
+  total_pages: Int!
+  results: [Movie!]!
+}
+
+type Mutation {
+  movieCreate(input: MovieCreateInput!): Movie
+}
+
+type Network {
+  name: String
+  id: Int
+  logo_path: String
+  origin_country: String
+}
+
+type Person {
+  id: ID!
+  name: String!
+  biography: String
+  birthday: String
+  deathday: String
+  place_of_birth: String
+  profile_path: String
+  cast: [Movie!]!
+}
+
+type PersonResponse {
+  page: Int!
+  total_results: Int!
+  total_pages: Int!
+  results: [Person!]!
+}
+
+type ProductionCompany {
+  id: ID!
+  name: String!
+  logo_path: String
+  origin_country: String
+}
+
+type Query {
+  movie(id: ID!): Movie
+  upcomingMovies(page: Int): MoviesResponse!
+  nowPlayingMovies(page: Int): MoviesResponse!
+  discoverMovies(input: DiscoverMoviesInput): MoviesResponse!
+  person(id: ID!): Person
+  genres: [Genre!]!
+  genresSeries: [Genre!]!
+  searchMovies(query: String!, page: Int): MoviesResponse
+  searchSeries(query: String!, page: Int): SeriesResponse
+  searchPerson(query: String!, page: Int): PersonResponse
+  searchMulti(query: String!, page: Int): SearchResponse
+  series(id: ID!): Series
+  discoverSeries(input: DiscoverSeriesInput): SeriesResponse!
+}
+
+type Review {
+  id: ID!
+  author_details: ReviewAuthor!
+  content: String!
+  created_at: String!
+}
+
+type ReviewAuthor {
+  username: String!
+  avatar_path: String
+}
+
+type SearchResponse {
+  page: Int
+  total_results: Int
+  total_pages: Int
+  results: [SearchResults]
+}
+
+union SearchResults = Movie | Series | Person
+type Season {
+  id: ID!
+  air_date: String
+  episode_count: Int
+  name: String
+  overview: String
+  poster_path: String
+  season_number: Int
+  episodes: [Episode]
+  seriesId: ID!
+}
+
+type Series {
+  id: ID!
+  name: String!
+  overview: String
+  backdrop_path: String
+  homepage: String
+  vote_average: Float
+  vote_count: Int
+  created_by: [Creator!]
+  first_air_date: String
+  next_episode_to_air: Episode
+  last_episode_to_air: Episode
+  original_language: String
+  original_name: String
+  in_production: Boolean
+  production_companies: [ProductionCompany!]
+  status: String
+  tagline: String
+  type: String
+  languages: [String!]
+  networks: [Network]
+  last_air_date: String
+  number_of_episodes: Int
+  number_of_seasons: Int
+  origin_country: [String!]
+  popularity: Float
+  poster_path: String
+  seasons: [Season!]
+  genres: [Genre!]
+  credits: CreditsTv
+  reviews: [Review]!
+  recommendations: [Series]!
+  videos: [Video]!
+}
+
+type SeriesResponse {
+  page: Int!
+  total_results: Int!
+  total_pages: Int!
+  results: [Series!]!
+}
+
+type Video {
+  id: ID!
+  key: String
+  name: String
+  site: String
+  type: String
+}
