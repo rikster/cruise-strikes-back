@@ -1,16 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const SEARCH_MOVIES = gql`
-  query SearchMovies($query: String!, $page: Int) {
-    searchMovies(query: $query, page: $page) {
-      results {
-        id
-        title
-      }
-    }
-  }
-`;
-
 export const SEARCH_PERSON = gql`
   query SearchPerson($query: String!, $page: Int) {
     searchPerson(query: $query, page: $page) {
@@ -26,7 +15,7 @@ export const SEARCH_PERSON = gql`
   }
 `;
 
-export const SEARCH_MOVIES_WITH_CAST = gql`
+export const SEARCH_MOVIES = gql`
   query SearchMovies($query: String!, $page: Int) {
     searchMovies(query: $query, page: $page) {
       results {
