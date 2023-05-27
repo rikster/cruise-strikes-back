@@ -35,6 +35,8 @@ const SearchBar: React.FC = () => {
   };
 
   const handleListAll = () => {
+    setInput("");
+    inputRef.current?.focus();
     setLastAction("listAll");
     searchPerson({ variables: { query: TOM_CRUISE_NAME, page: 1 } });
   };
