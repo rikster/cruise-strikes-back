@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { SEARCH_MOVIES, SEARCH_PERSON } from "../queries/queries";
 import SearchTomCruiseMovies from "./SearchTomCruiseMovies";
@@ -13,6 +13,7 @@ const SearchBar: React.FC = () => {
   const [lastAction, setLastAction] = useState<"search" | "listAll" | null>(
     null
   );
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [
     searchMovies,
@@ -23,6 +24,10 @@ const SearchBar: React.FC = () => {
     searchPerson,
     { data: personData, loading: personLoading, error: personError },
   ] = useLazyQuery(SEARCH_PERSON);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const handleSearch = () => {
     setLastAction("search");
@@ -53,6 +58,7 @@ const SearchBar: React.FC = () => {
     <div>
       <div className="flex items-center bg-white rounded-lg shadow-lg p-2 mb-4">
         <input
+          ref={inputRef}
           type="text"
           placeholder="Search Tom Cruise movies"
           value={input}
@@ -84,8 +90,7 @@ const SearchBar: React.FC = () => {
         <p>Searching movies...</p>
       ) : moviesError ? (
         <p>
-          Error occurred while fetching movie search hhdata:{" "}
-          {moviesError.message}
+          Error occurred while fetching movie search data: {moviesError.message}
         </p>
       ) : lastAction === "search" && tomCruiseMovies.length > 0 ? (
         <SearchTomCruiseMovies movies={tomCruiseMovies} />
