@@ -57,8 +57,8 @@ const SearchBar: React.FC = () => {
   const isLoading = moviesLoading || personLoading;
 
   return (
-    <div>
-      <div className="flex items-center bg-white rounded-lg shadow-lg p-2 mb-4">
+    <div className="container mx-auto px-4">
+      <div className="flex flex-col sm:flex-row items-center bg-white rounded-lg shadow-lg p-2 mb-4">
         <input
           ref={inputRef}
           type="text"
@@ -74,14 +74,14 @@ const SearchBar: React.FC = () => {
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2 sm:mt-0 sm:ml-2 w-full sm:w-auto"
           disabled={isLoading}
         >
           Search
         </button>
         <button
           onClick={handleListAll}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg ml-1"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2 sm:mt-0 sm:ml-2 w-full sm:w-auto"
           disabled={isLoading}
         >
           List All
