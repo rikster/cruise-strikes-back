@@ -1,24 +1,27 @@
 import React from "react";
 
-//note: persons.cast.title is a movie title
-type Persons = {
+type Cast = {
   id: string;
-  cast: {
-    id: string;
-    title: string;
-  }[];
-}[];
+  title: string;
+};
+
+type Person = {
+  id: string;
+  cast: Cast[];
+};
+
+type Persons = Person[];
 
 interface AllTomCruiseMoviesProps {
-  persons: Persons[];
+  persons: Persons;
 }
 
 const AllTomCruiseMovies: React.FC<AllTomCruiseMoviesProps> = ({ persons }) => (
   <div className="mt-4">
     <h2 className="text-xl font-bold mb-2">Movies:</h2>
-    {persons.map((person: any) => (
+    {persons.map((person: Person) => (
       <div key={person.id}>
-        {person.cast.map((movie: any) => (
+        {person.cast.map((movie: Cast) => (
           <div
             key={movie.id}
             className="bg-white p-4 rounded-lg shadow-lg mb-4"
