@@ -9,6 +9,9 @@ export const SEARCH_PERSON = gql`
         cast {
           id
           title
+          overview
+          release_date
+          vote_average
         }
       }
     }
@@ -21,6 +24,9 @@ export const SEARCH_MOVIES = gql`
       results {
         id
         title
+        overview
+        release_date
+        vote_average
         credits {
           cast {
             id
