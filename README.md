@@ -19,7 +19,8 @@ John Johnson hosts a weekly movie event with his local Tom Cruise Fan club calle
 - GraphQL Endpoint: https://tmdb-one-blue.vercel.app/
 - GraphQL Playground: https://www.graphqlbin.com/v2/new (enter endpoint above)
 - GraphQL Schema
- ```
+
+```
 src\queries\schema.graphql
 ```
 
@@ -37,3 +38,20 @@ src\queries\schema.graphql
   - Jest
 - Styling
   - CSSTailwind
+
+## This project was bootstrapped with Create React App
+
+[Create React App](https://github.com/facebook/create-react-app).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+## `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## `npm test`
+
+Launches the test runner in the interactive watch mode.\
