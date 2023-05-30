@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import AllTomCruiseMovies from "./AllTomCruiseMovies";
+import ListAllMovies from "./ListAllMovies";
 
 describe("AllTomCruiseMovies", () => {
   test("renders movie data correctly", () => {
@@ -26,7 +26,7 @@ describe("AllTomCruiseMovies", () => {
       },
     ];
 
-    render(<AllTomCruiseMovies persons={mockPersons} />);
+    render(<ListAllMovies persons={mockPersons} />);
 
     mockPersons.forEach((person) => {
       person.cast.forEach((movie) => {

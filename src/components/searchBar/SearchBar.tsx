@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { SEARCH_MOVIES, SEARCH_PERSON } from "../queries/queries";
-import SearchTomCruiseMovies from "./SearchTomCruiseMovies";
-import AllTomCruiseMovies from "./AllTomCruiseMovies";
+import { SEARCH_MOVIES, SEARCH_PERSON } from "../../queries/queries";
+import SearchMovies from "./searchAllMovies/SearchMovies";
+import ListAllMovies from "./listAllMovies/ListAllMovies";
 
 //fetch from APIs
 const TOM_CRUISE_ID = "500";
@@ -95,7 +95,7 @@ const SearchBar: React.FC = () => {
           Error occurred while fetching movie search data: {moviesError.message}
         </p>
       ) : lastAction === "search" && tomCruiseMovies.length > 0 ? (
-        <SearchTomCruiseMovies movies={tomCruiseMovies} />
+        <SearchMovies movies={tomCruiseMovies} />
       ) : null}
 
       {personLoading ? (
@@ -105,7 +105,7 @@ const SearchBar: React.FC = () => {
           Error occurred while fetching all movie data: {personError.message}
         </p>
       ) : lastAction === "listAll" && allTomCruiseMovies.length > 0 ? (
-        <AllTomCruiseMovies persons={allTomCruiseMovies} />
+        <ListAllMovies persons={allTomCruiseMovies} />
       ) : null}
     </div>
   );

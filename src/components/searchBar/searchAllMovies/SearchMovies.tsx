@@ -14,7 +14,7 @@ interface SearchTomCruiseMoviesProps {
   movies: Movies;
 }
 
-const SearchTomCruiseMovies: React.FC<SearchTomCruiseMoviesProps> = ({
+const SearchMovies: React.FC<SearchTomCruiseMoviesProps> = ({
   movies,
 }) => (
   <div className="mt-4">
@@ -40,4 +40,4 @@ const SearchTomCruiseMovies: React.FC<SearchTomCruiseMoviesProps> = ({
   </div>
 );
 
-export default SearchTomCruiseMovies;
+export default SearchMovies;

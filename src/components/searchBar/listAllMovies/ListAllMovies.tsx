@@ -19,7 +19,7 @@ interface AllTomCruiseMoviesProps {
   persons: Persons;
 }
 
-const AllTomCruiseMovies: React.FC<AllTomCruiseMoviesProps> = ({ persons }) => (
+const ListAllMovies: React.FC<AllTomCruiseMoviesProps> = ({ persons }) => (
   <div className="mt-4">
     <h2 className="text-xl font-bold mb-2">Movies:</h2>
     {persons.map((person: Person) => (
@@ -50,4 +50,4 @@ const AllTomCruiseMovies: React.FC<AllTomCruiseMoviesProps> = ({ persons }) => (
   </div>
 );
 
-export default AllTomCruiseMovies;
+export default ListAllMovies;

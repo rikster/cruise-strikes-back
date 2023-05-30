@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import SearchTomCruiseMovies from "./SearchTomCruiseMovies";
+import SearchMovies from "./SearchMovies";
 
 describe("SearchTomCruiseMovies", () => {
   test("renders movie data correctly", () => {
@@ -21,7 +21,7 @@ describe("SearchTomCruiseMovies", () => {
       },
     ];
 
-    render(<SearchTomCruiseMovies movies={mockMovies} />);
+    render(<SearchMovies movies={mockMovies} />);
 
     const firstMovieTitle = screen.getByRole("heading", { name: /Top Gun/i });
     expect(firstMovieTitle).toBeInTheDocument();

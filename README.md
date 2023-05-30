@@ -29,7 +29,7 @@ src\queries\schema.graphql
 - Front End Framework
   - Scaffolded with [create-react-app](https://create-react-app.dev/)
     - Prefer [Vite](https://vitejs.dev/) for Speed
-    - However, React testing is not built-in (time consuming to setup)
+    - However, React Jest testing is not built-in (time consuming to setup)
   - React + TypeScript
 - Data Access
   - GraphQL Queries

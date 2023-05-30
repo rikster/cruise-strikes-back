@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
-import { SEARCH_MOVIES, SEARCH_PERSON } from "../queries/queries";
-import SearchBar from "./SearchBarTomCruise";
+import { SEARCH_MOVIES, SEARCH_PERSON } from "../../queries/queries";
+import SearchBar from "./SearchBar";
 
 const mocks = [
   {
