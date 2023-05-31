@@ -1,10 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import SearchMovies from "./SearchMovies";
+import { Movies } from "../../../queries/types";
 
 describe("SearchTomCruiseMovies", () => {
   test("renders movie data correctly", () => {
-    const mockMovies = [
+    const mockMovies: Movies = [
       {
         id: "1",
         title: "Top Gun",

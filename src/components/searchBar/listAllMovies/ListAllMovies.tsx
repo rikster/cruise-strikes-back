@@ -1,19 +1,5 @@
 import React from "react";
-
-type Cast = {
-  id: string;
-  title: string;
-  overview: string;
-  release_date: string;
-  vote_average: number;
-};
-
-type Person = {
-  id: string;
-  cast: Cast[];
-};
-
-type Persons = Person[];
+import { Person, Cast, Persons } from "../../../queries/types";
 
 interface AllTomCruiseMoviesProps {
   persons: Persons;

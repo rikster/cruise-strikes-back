@@ -1,14 +1,5 @@
 import React from "react";
-
-type Movie = {
-  id: string;
-  title: string;
-  overview: string;
-  release_date: string;
-  vote_average: number;
-};
-
-type Movies = Movie[];
+import { Movie, Movies } from "../../../queries/types";
 
 interface SearchTomCruiseMoviesProps {
   movies: Movies;

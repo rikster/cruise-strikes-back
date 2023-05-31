@@ -31,6 +31,7 @@ const SearchBar: React.FC = () => {
 
   const handleSearch = () => {
     setLastAction("search");
+    //note pagination is not enabled on the server - ony page 1 is avail
     searchMovies({ variables: { query: input, page: 1 } });
   };
 
@@ -38,10 +39,16 @@ const SearchBar: React.FC = () => {
     setInput("");
     inputRef.current?.focus();
     setLastAction("listAll");
+    //note pagination is not enabled on the server- ony page 1 is avail
     searchPerson({ variables: { query: TOM_CRUISE_NAME, page: 1 } });
   };
 
-  const movieResults = moviesData?.searchMovies.results || [];
+  //const movieResults = moviesData?.searchMovies.results || [];
+  const movieResults = (moviesData?.searchMovies.results || []).sort(
+    (a: any, b: any) =>
+      new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
+  );
+  console.log(movieResults);
   const tomCruiseMovies = movieResults.filter((movie: any) =>
     movie.credits.cast.some((cast: any) => cast.id === TOM_CRUISE_ID)
   );
