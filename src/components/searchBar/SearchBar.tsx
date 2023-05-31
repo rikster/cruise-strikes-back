@@ -43,12 +43,12 @@ const SearchBar: React.FC = () => {
     searchPerson({ variables: { query: TOM_CRUISE_NAME, page: 1 } });
   };
 
-  //const movieResults = moviesData?.searchMovies.results || [];
-  const movieResults = (moviesData?.searchMovies.results || []).sort(
-    (a: any, b: any) =>
-      new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
-  );
-  console.log(movieResults);
+  const movieResults = moviesData?.searchMovies.results || [];
+  // const movieResults = (moviesData?.searchMovies.results || []).sort(
+  //   (a: any, b: any) =>
+  //     new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
+  // );
+  //console.log(movieResults);
   const tomCruiseMovies = movieResults.filter((movie: any) =>
     movie.credits.cast.some((cast: any) => cast.id === TOM_CRUISE_ID)
   );
