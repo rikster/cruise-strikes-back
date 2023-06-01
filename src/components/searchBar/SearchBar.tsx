@@ -3,6 +3,7 @@ import { useLazyQuery } from "@apollo/client";
 import { SEARCH_MOVIES, SEARCH_PERSON } from "../../queries/queries";
 import SearchMovies from "./searchAllMovies/SearchMovies";
 import ListAllMovies from "./listAllMovies/ListAllMovies";
+import { Cast, Movie, Person } from "../../queries/types";
 
 //fetch from APIs
 const TOM_CRUISE_ID = "500";
@@ -43,21 +44,20 @@ const SearchBar: React.FC = () => {
     searchPerson({ variables: { query: TOM_CRUISE_NAME, page: 1 } });
   };
 
-  const movieResults = moviesData?.searchMovies.results || [];
-  // const movieResults = (moviesData?.searchMovies.results || []).sort(
-  //   (a: any, b: any) =>
-  //     new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
-  // );
-  //console.log(movieResults);
-  const tomCruiseMovies = movieResults.filter((movie: any) =>
-    movie.credits.cast.some((cast: any) => cast.id === TOM_CRUISE_ID)
+  //const movieResults = moviesData?.searchMovies.results || [];
+  const movieResults = [...(moviesData?.searchMovies.results || [])].sort(
+    (a: Movie, b: Movie) =>
+      new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
+  );
+  const tomCruiseMovies = movieResults.filter((movie: Movie) =>
+    movie.credits.cast.some((cast: Cast) => cast.id === TOM_CRUISE_ID)
   );
 
   const personResults = personData?.searchPerson.results || [];
-  const allTomCruiseMovies = personResults.map((actor: any) => {
+  const allTomCruiseMovies = personResults.map((actor: Person) => {
     return {
       ...actor,
-      cast: actor.cast.filter((movie: any) => movie.title !== null),
+      cast: actor.cast.filter((movie: Movie) => movie.title !== null),
     };
   });
 

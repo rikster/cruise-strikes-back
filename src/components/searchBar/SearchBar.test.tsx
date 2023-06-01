@@ -1,99 +1,108 @@
+/* eslint-disable testing-library/prefer-find-by */
+/* eslint-disable testing-library/prefer-screen-queries */
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
-import { SEARCH_MOVIES, SEARCH_PERSON } from "../../queries/queries";
-import SearchBar from "./SearchBar";
 
-const mocks = [
-  {
-    request: {
-      query: SEARCH_MOVIES,
-      variables: { query: "Top Gun", page: 1 },
-    },
-    result: {
-      data: {
-        searchMovies: {
-          results: [
-            {
-              id: "1",
-              title: "Top Gun",
-              overview: "Top Gun is about pilots in the Navy...",
-              release_date: "1986-05-16",
-              vote_average: 7.2,
-              credits: {
-                cast: [
-                  {
-                    id: "500", // Tom Cruise's ID
-                    name: "Tom Cruise",
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
+import SearchBar from "./SearchBar";
+import { SEARCH_MOVIES, SEARCH_PERSON } from "../../queries/queries";
+
+const movieMock = {
+  request: {
+    query: SEARCH_MOVIES,
+    variables: {
+      query: "test",
+      page: 1,
     },
   },
-  {
-    request: {
-      query: SEARCH_PERSON,
-      variables: { query: "Tom Cruise", page: 1 },
-    },
-    result: {
-      data: {
-        searchPerson: {
-          results: [
-            {
-              id: "1",
+  result: {
+    data: {
+      searchMovies: {
+        results: [
+          {
+            id: "1",
+            title: "Test Movie",
+            overview: "This is a test movie.",
+            release_date: "2022-01-01",
+            vote_average: 7.5,
+            credits: {
               cast: [
                 {
-                  id: "1",
-                  title: "Top Gun",
-                  overview: "Top Gun is about pilots in the Navy...",
-                  release_date: "1986-05-16",
-                  vote_average: 7.2,
+                  id: "500",
                 },
               ],
             },
-          ],
-        },
+          },
+        ],
       },
     },
   },
-];
+};
+
+const personMock = {
+  request: {
+    query: SEARCH_PERSON,
+    variables: {
+      query: "Tom Cruise",
+      page: 1,
+    },
+  },
+  result: {
+    data: {
+      searchPerson: {
+        results: [
+          {
+            id: "500",
+            name: "Tom Cruise",
+            cast: [
+              {
+                id: "1",
+                title: "Test Movie",
+                overview: "This is a test movie.",
+                release_date: "2022-01-01",
+                vote_average: 7.5,
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+};
 
 describe("SearchBar", () => {
   it("renders without error", () => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={[]} addTypename={false}>
         <SearchBar />
       </MockedProvider>
     );
   });
 
-  it("renders input field correctly", () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <SearchBar />
-      </MockedProvider>
-    );
-    expect(
-      screen.getByPlaceholderText("Search Tom Cruise movies")
-    ).toBeInTheDocument();
-  });
-
-  it("displays movie data correctly when Search button is clicked", async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
+  it("renders movie results on search", async () => {
+    const { getByPlaceholderText, getByText } = render(
+      <MockedProvider mocks={[movieMock]} addTypename={false}>
         <SearchBar />
       </MockedProvider>
     );
 
-    fireEvent.change(screen.getByPlaceholderText("Search Tom Cruise movies"), {
-      target: { value: "Top Gun" },
+    fireEvent.change(getByPlaceholderText("Search Tom Cruise movies"), {
+      target: { value: "test" },
     });
-    fireEvent.click(screen.getByText("Search"));
+    fireEvent.click(getByText("Search"));
 
-    expect(await screen.findByText("Top Gun")).toBeInTheDocument();
+    await waitFor(() => getByText("Test Movie"));
+  });
+
+  it("renders person results on list all", async () => {
+    const { getByText } = render(
+      <MockedProvider mocks={[personMock]} addTypename={false}>
+        <SearchBar />
+      </MockedProvider>
+    );
+
+    fireEvent.click(getByText("List All"));
+
+    await waitFor(() => getByText("Test Movie"));
   });
 });

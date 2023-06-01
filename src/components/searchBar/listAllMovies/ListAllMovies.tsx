@@ -1,5 +1,5 @@
 import React from "react";
-import { Person, Cast, Persons } from "../../../queries/types";
+import { Movie, Person, Cast, Persons } from "../../../queries/types";
 
 interface AllTomCruiseMoviesProps {
   persons: Persons;
@@ -10,7 +10,7 @@ const ListAllMovies: React.FC<AllTomCruiseMoviesProps> = ({ persons }) => (
     <h2 className="text-xl font-bold mb-2">Movies:</h2>
     {persons.map((person: Person) => (
       <div key={person.id}>
-        {person.cast.map((movie: Cast) => {
+        {person.cast.map((movie: Movie) => {
           //format release date in pure js (could use moment.js)
           const releaseDate = new Date(movie.release_date);
           const formattedDate = `${releaseDate

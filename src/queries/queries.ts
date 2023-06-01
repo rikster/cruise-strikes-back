@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+//cast is Movie in the PersonResponse! (confusing API)
 export const SEARCH_PERSON = gql`
   query SearchPerson($query: String!, $page: Int) {
     searchPerson(query: $query, page: $page) {

@@ -1,36 +1,41 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
+import { Movie, Person, Persons } from "../../../queries/types";
 import ListAllMovies from "./ListAllMovies";
-import { Persons } from "../../../queries/types";
 
-describe("AllTomCruiseMovies", () => {
+describe("ListAllMovies", () => {
   test("renders movie data correctly", () => {
-    const mockPersons: Persons = [
+    const mockData: Persons = [
       {
         id: "1",
         cast: [
           {
-            id: "1",
-            title: "Top Gun",
-            overview: "Top Gun is about pilots in the Navy...",
-            release_date: "1986-05-16",
-            vote_average: 7.2,
+            id: "101",
+            title: "Movie Title",
+            overview: "Movie Overview",
+            release_date: "2022-02-20",
+            vote_average: 8.1,
+            credits: {
+              cast: [{ id: "500" }],
+            },
           },
           {
-            id: "2",
-            title: "Mission Impossible",
-            overview: "Mission Impossible is about a secret agent...",
-            release_date: "1996-05-22",
-            vote_average: 7.1,
+            id: "102",
+            title: "Another Movie Title",
+            overview: "Another Movie Overview",
+            release_date: "2022-01-20",
+            vote_average: 7.2,
+            credits: {
+              cast: [{ id: "500" }],
+            },
           },
         ],
       },
     ];
 
-    render(<ListAllMovies persons={mockPersons} />);
+    render(<ListAllMovies persons={mockData} />);
 
-    mockPersons.forEach((person) => {
-      person.cast.forEach((movie) => {
+    mockData.forEach((person: Person) => {
+      person.cast.forEach((movie: Movie) => {
         const releaseDate = new Date(movie.release_date);
         const formattedDate = `${releaseDate
           .getDate()

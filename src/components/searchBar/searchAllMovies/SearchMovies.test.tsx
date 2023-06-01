@@ -1,9 +1,8 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import SearchMovies from "./SearchMovies";
 import { Movies } from "../../../queries/types";
 
-describe("SearchTomCruiseMovies", () => {
+describe("SearchMovies", () => {
   test("renders movie data correctly", () => {
     const mockMovies: Movies = [
       {
@@ -12,6 +11,13 @@ describe("SearchTomCruiseMovies", () => {
         overview: "Top Gun is about pilots in the Navy...",
         release_date: "1986-05-16",
         vote_average: 7.2,
+        credits: {
+          cast: [
+            {
+              id: "500",
+            },
+          ],
+        },
       },
       {
         id: "2",
@@ -19,6 +25,13 @@ describe("SearchTomCruiseMovies", () => {
         overview: "Mission Impossible is about a secret agent...",
         release_date: "1996-05-22",
         vote_average: 7.1,
+        credits: {
+          cast: [
+            {
+              id: "500",
+            },
+          ],
+        },
       },
     ];
 
