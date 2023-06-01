@@ -8,7 +8,7 @@ interface SearchTomCruiseMoviesProps {
 
 const SearchMovies: React.FC<SearchTomCruiseMoviesProps> = ({ movies }) => (
   <div className="mt-4">
-    <h2 className="text-xl font-bold mb-2">Movies:</h2>
+    <h2 className="text-xl font-bold mb-2">Movie Search Results:</h2>
     {movies.map((movie: Movie) => (
       <MovieItem key={movie.id} movie={movie} />
     ))}

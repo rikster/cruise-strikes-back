@@ -8,7 +8,7 @@ interface AllTomCruiseMoviesProps {
 
 const ListAllMovies: React.FC<AllTomCruiseMoviesProps> = ({ persons }) => (
   <div className="mt-4">
-    <h2 className="text-xl font-bold mb-2">Movies:</h2>
+    <h2 className="text-xl font-bold mb-2">All Movies List:</h2>
     {persons.map((person: Person) => (
       <div key={person.id}>
         {person.cast.map((movie: Movie) => (
