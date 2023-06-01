@@ -44,7 +44,7 @@ const SearchBar: React.FC = () => {
     searchPerson({ variables: { query: TOM_CRUISE_NAME, page: 1 } });
   };
 
-  //const movieResults = moviesData?.searchMovies.results || [];
+  //order all movies by release date descending
   const movieResults = [...(moviesData?.searchMovies.results || [])].sort(
     (a: Movie, b: Movie) =>
       new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
@@ -54,10 +54,17 @@ const SearchBar: React.FC = () => {
   );
 
   const personResults = personData?.searchPerson.results || [];
+  //order all movies by release date descending
   const allTomCruiseMovies = personResults.map((actor: Person) => {
     return {
       ...actor,
-      cast: actor.cast.filter((movie: Movie) => movie.title !== null),
+      cast: actor.cast
+        .filter((movie: Movie) => movie.title !== null)
+        .sort(
+          (a: Movie, b: Movie) =>
+            new Date(b.release_date).getTime() -
+            new Date(a.release_date).getTime()
+        ),
     };
   });
 
