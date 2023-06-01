@@ -14,6 +14,8 @@ describe("ListAllMovies", () => {
             overview: "Movie Overview",
             release_date: "2022-02-20",
             vote_average: 8.1,
+            poster_path: "",
+            backdrop_path: "",
             credits: {
               cast: [{ id: "500" }],
             },
@@ -24,6 +26,8 @@ describe("ListAllMovies", () => {
             overview: "Another Movie Overview",
             release_date: "2022-01-20",
             vote_average: 7.2,
+            poster_path: "",
+            backdrop_path: "",
             credits: {
               cast: [{ id: "500" }],
             },

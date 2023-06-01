@@ -71,7 +71,7 @@ const SearchBar: React.FC = () => {
   const isLoading = moviesLoading || personLoading;
 
   return (
-    <div className="container mx-auto px-4 sm:px-0.5">
+    <div className="container mx-auto px-0 md:px-2 lg:px-4 xl:px-4 xxl:px-4">
       <div className="flex flex-col sm:flex-row items-center bg-slate-100 rounded-lg shadow-lg p-2 mb-4">
         <input
           ref={inputRef}

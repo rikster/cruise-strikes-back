@@ -25,6 +25,8 @@ const movieMock = {
             overview: "This is a test movie.",
             release_date: "2022-01-01",
             vote_average: 7.5,
+            poster_path: "",
+            backdrop_path: "",
             credits: {
               cast: [
                 {
@@ -61,6 +63,8 @@ const personMock = {
                 overview: "This is a test movie.",
                 release_date: "2022-01-01",
                 vote_average: 7.5,
+                poster_path: "",
+                backdrop_path: "",
               },
             ],
           },

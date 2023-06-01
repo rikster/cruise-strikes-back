@@ -13,6 +13,8 @@ export const SEARCH_PERSON = gql`
           overview
           release_date
           vote_average
+          poster_path
+          backdrop_path
         }
       }
     }
@@ -28,6 +30,8 @@ export const SEARCH_MOVIES = gql`
         overview
         release_date
         vote_average
+        poster_path
+        backdrop_path
         credits {
           cast {
             id
