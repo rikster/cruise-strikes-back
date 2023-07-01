@@ -2,7 +2,13 @@
 
 ![Cruisey](https://media.giphy.com/media/D16XHdsB1PBxm/giphy.gif)
 
-## The Scenario
+# Submission
+
+https://cruise-strikes-back.vercel.app/
+
+Note: Although the app is responsive, the images have not been optimized.
+
+# The Scenario
 
 John Johnson hosts a weekly movie event with his local Tom Cruise Fan club called "John Johnsons Cruisey Movie Monday". He's asked you to build a website where he can either search for a specific movie or display a list of Tom Cruise's movies for his audience to select from.
 
@@ -36,10 +42,11 @@ src\queries\schema.graphql
   - Apollo GraphQL Client
 - Testing
   - Jest
+  - React Testing Library
 - Styling
-  - CSSTailwind
+  - CSS Tailwind
 
-## This project was bootstrapped with Create React App
+# This project was bootstrapped with Create React App
 
 [Create React App](https://github.com/facebook/create-react-app).
 
